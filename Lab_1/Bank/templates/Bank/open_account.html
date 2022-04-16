@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<head>
+</head>
+{% block content %}
+    <form action="." method="post">
+      {{ form.as_p }}
+      {% csrf_token %}
+      <button>Open</button>
+    </form>
+    <a href="main">To main page</a>
+{% endblock %}

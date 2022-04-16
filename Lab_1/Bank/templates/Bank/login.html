@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+{% block content %}
+    <div class="login-page">
+        <div class="form">
+            <form action="." method="post">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <button>login</button>
+            </form>
+            <p><a href={% url 'registration' %}>Register now</a></p>
+            <p><a href={% url 'login_bank_spec' %}>Login here like bank specialist</a></p>
+        </div>
+    </div>
+{% endblock %}

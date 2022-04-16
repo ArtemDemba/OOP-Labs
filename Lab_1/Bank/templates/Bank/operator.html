@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>Manager</title>
+</head>
+<body>
+
+{% block content %}
+
+<table class="table">
+        {% for acc in accounts %}
+
+            <tr>
+                <td>{{ acc.id }}</td>
+                <td>{{ acc.user.username }}</td>
+                {% if acc.bank == bank %}
+                    <td>{{ acc.bank }}</td>
+                {% endif %}
+                <td>{{ acc.sum }}</td>
+                <td>{{ acc.opening_date }}</td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
