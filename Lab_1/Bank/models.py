@@ -1,7 +1,22 @@
 from datetime import date
 from django.contrib.auth.models import User, AbstractUser
-
 from django.db import models
+
+
+class Month(models.Model):
+    month_amount = models.PositiveSmallIntegerField(default=0)
+    bank = models.ManyToManyField('Bank')
+
+    def __str__(self):
+        return str(self.month_amount)
+
+
+class InterestRate(models.Model):
+    interest_rate = models.FloatField(default=1)
+    bank = models.ManyToManyField('Bank')
+
+    def __str__(self):
+        return str(self.interest_rate)
 
 
 class User(AbstractUser):
@@ -21,7 +36,7 @@ class FinancialEntity(models.Model):
     class Meta:
         abstract = True
 
-    sum = models.PositiveBigIntegerField(default=0)
+    sum = models.PositiveIntegerField(default=0)
     opening_date = models.DateField(auto_now_add=date.today())
     block = models.BooleanField(default=False)
 
@@ -39,12 +54,27 @@ class BankAccount(FinancialEntity):
         return self.block
 
 
+class Deposit(FinancialEntity):
+    month = ((3, 3),
+             (6, 6),
+             (9, 9),
+             (12, 12),
+             (24, 24),
+             (36, 36))
+    credit_status = models.PositiveSmallIntegerField(choices=month, default=month[1][0])
+    interest_rate = models.ForeignKey('InterestRate', on_delete=models.PROTECT)
+
+
+class Credit(Deposit):
+    pass
+
+
 class Enterprise(models.Model):
 
     class Meta:
         abstract = True
 
-    USERNAME_FIELD = models.CharField(max_length=100, default='', unique=True)
+    name = models.CharField(max_length=100, default='', unique=True)
     email = models.CharField(max_length=50, default='')
     PAN = models.CharField(max_length=9, unique=True, default='')
     address = models.CharField(max_length=150, unique=True, default='')
@@ -64,7 +94,7 @@ class Bank(Enterprise):
 
 
 class Applications(models.Model):
-    username = models.CharField(max_length=100, default='')
+    name = models.CharField(max_length=100, default='')
     email = models.EmailField(max_length=50, default='')
     phone = models.CharField(max_length=13, default='', verbose_name='phone')
     is_approved = models.BooleanField(default=False)

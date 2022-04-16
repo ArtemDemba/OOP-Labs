@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p><a href="/">To main page</a></p>
+    {% for dep in deposits %}
+        <p><strong>Deposit id: {{ dep.id }}</strong></p>
+        <p>Bank: {{ dep.bank }}</p>
+        <p>Sum: {{ dep.sum }} BYN</p>
+        <p>Months: {{ dep.months }}</p>
+        <p>Interest rate: {{ dep.interest_rate }}%</p>
+        <p>Opening date: {{ dep.opening_date }}</p>
+    {% endfor %}
+</body>
+</html>

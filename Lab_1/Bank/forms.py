@@ -22,6 +22,20 @@ class BankAccountForm(forms.ModelForm):
         fields = ('sum', 'bank')
 
 
+class DepositForm(forms.ModelForm):
+
+    class Meta:
+        model = Deposit
+        fields = ['sum', 'bank', 'months', 'interest_rate']
+
+
+class CreditForm(forms.ModelForm):
+
+    class Meta:
+        model = Credit
+        fields = ['sum', 'bank', 'months', 'interest_rate']
+
+
 class LoginFormBankSpec(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
@@ -31,4 +45,4 @@ class RegisterBankSpec(UserCreationForm):
 
     class Meta:
         model = Applications
-        fields = ('username', 'email', 'phone')
+        fields = ('name', 'email', 'phone')

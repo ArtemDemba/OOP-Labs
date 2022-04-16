@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p><a href="/">To main page</a></p>
+    {% for acc in accs %}
+    <p><strong>Bank account id: {{ acc.id }}</strong></p>
+    <p>Bank: {{ acc.bank }}</p>
+    <p>Sum: {{ acc.sum }} BYN</p>
+    <p>Opening date: {{ acc.opening_date }}</p>
+    {% endfor %}
+</body>
+</html>
