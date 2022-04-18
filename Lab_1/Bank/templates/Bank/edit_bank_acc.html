@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Block bank account</title>
+</head>
+<body class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>Block bank account (0 - unlock, 1 - block)</label><br>
+            <input type="text" name="block" value="{{acc.block}}" />
+        </p>
+        <input type="submit" value="Save" >
+    </form>
+</body>
+</html>

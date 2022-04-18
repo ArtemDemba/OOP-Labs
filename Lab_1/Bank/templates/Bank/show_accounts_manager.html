@@ -5,12 +5,16 @@
     <title>{{ title }}</title>
 </head>
 <body>
-    <p><a href="/main">To main page</a></p>
+  <p><a href="/main_manager">To main page</a></p>
     {% for acc in accs %}
     <p><strong>Bank account id: {{ acc.id }}</strong></p>
+    <p>Owner: {{ acc.user }}</p>
     <p>Bank: {{ acc.bank }}</p>
     <p>Sum: {{ acc.sum }} BYN</p>
     <p>Opening date: {{ acc.opening_date }}</p>
+    <p>Is blocked: {{ acc.block }}</p>
+    <button onclick="window.location.href = 'edit/{{acc.id}}';">Change</button>
+
     {% endfor %}
 </body>
 </html>

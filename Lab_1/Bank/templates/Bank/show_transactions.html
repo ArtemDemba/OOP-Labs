@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <p><a href="/main">To main page</a></p>
+    {% for t in transactions %}
+        <p><strong>Transaction id: {{ t.id }}</strong></p>
+        <p>Sender: {{ t.sender }}</p>
+        <p>Recipient Id: {{ t.recipient.id }}</p>
+        <p>Sending sum: {{ t.sending_sum }}</p>
+        <p>Date: {{ t.date }}</p>
+    {% endfor %}
+</body>
+</html>

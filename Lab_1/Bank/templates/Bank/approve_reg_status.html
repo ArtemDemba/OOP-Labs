@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Approve status</title>
+</head>
+<body class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>Change registration status (denied, checking, accessed)</label><br>
+            <input type="text" name="registration_status" value="{{p.registration_status}}" />
+        </p>
+        <input type="submit" value="Save" >
+    </form>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+  <p><a href="/main">To main page</a></p>
+    {% for i in inst %}
+        <p><strong>Installment Id: {{ i.id }}</strong></p>
+        <p>Bank: {{ i.bank }}</p>
+        <p>Company: {{ i.company }}</p>
+        <p>Sum: {{ i.sum }} BYN</p>
+        <p>Months: {{ i.months }}</p>
+        <p>Status: {{ i.installment_status }}</p>
+        <a href="edit/{{i.id}}">Изменить</a>
+    {% endfor %}
+</body>
+</html>

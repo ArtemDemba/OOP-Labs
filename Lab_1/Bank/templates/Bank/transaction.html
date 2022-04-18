@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <head>
-        <title>{{ title }}</title>
+    <title>{{ title }}</title>
 </head>
 {% block content %}
     <form action="." method="post">
       {{ form.as_p }}
       {% csrf_token %}
-      <button onclick="window.location.href = '/main/';">Open</button>
-
+      <button>Send</button>
     </form>
     <p><a href="/main">To main page</a></p>
 {% endblock %}

@@ -22,6 +22,13 @@ class BankAccountForm(forms.ModelForm):
         fields = ('sum', 'bank')
 
 
+class TransactionForm(forms.ModelForm):
+
+    class Meta:
+        model = Transaction
+        fields = ('recipient', 'sending_sum')
+
+
 class DepositForm(forms.ModelForm):
 
     class Meta:
@@ -34,6 +41,12 @@ class CreditForm(forms.ModelForm):
     class Meta:
         model = Credit
         fields = ['sum', 'bank', 'months', 'interest_rate']
+
+
+class InstallmentForm(forms.ModelForm):
+    class Meta:
+        model = Installment
+        fields = ['sum', 'company', 'bank', 'months']
 
 
 class LoginFormBankSpec(forms.Form):

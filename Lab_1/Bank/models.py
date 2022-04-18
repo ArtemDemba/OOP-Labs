@@ -24,6 +24,18 @@ class User(AbstractUser):
     passport_number = models.CharField(max_length=20, default='', verbose_name='passport number')
     blocked = models.BooleanField(default=False)
     banks = models.ManyToManyField('Bank')
+    roles = (
+        ('Client', 'Client'),
+        ('Manager', 'Manager'),
+        ('Administrator', 'Administrator'),
+    )
+    role = models.CharField(max_length=30, choices=roles, default=roles[0][1])
+    reg_status = (
+        ('denied', 'denied'),
+        ('checking', 'checking'),
+        ('accessed', 'accessed')
+    )
+    registration_status = models.CharField(max_length=30, choices=reg_status, default=reg_status[1][0])
 
     def is_blocked(self):
         return self.blocked
@@ -44,6 +56,13 @@ class FinancialEntity(models.Model):
     bank = models.ForeignKey('Bank', on_delete=models.CASCADE)
 
 
+class Transaction(models.Model):
+    sending_sum = models.PositiveIntegerField(default=0)
+    date = models.DateField(auto_now_add=date.today())
+    sender = models.ForeignKey('User', on_delete=models.CASCADE)
+    recipient = models.ForeignKey('BankAccount', on_delete=models.CASCADE)
+
+
 class BankAccount(FinancialEntity):
     frozen = models.BooleanField(default=False)
 
@@ -53,20 +72,44 @@ class BankAccount(FinancialEntity):
     def is_blocked(self):
         return self.block
 
+    def __str__(self):
+        return f"Account Id: {self.pk}"
+
 
 class Deposit(FinancialEntity):
-    month = ((3, 3),
-             (6, 6),
-             (9, 9),
-             (12, 12),
-             (24, 24),
-             (36, 36))
-    credit_status = models.PositiveSmallIntegerField(choices=month, default=month[1][0])
+    months = models.ForeignKey('Month', on_delete=models.PROTECT)
     interest_rate = models.ForeignKey('InterestRate', on_delete=models.PROTECT)
+    appr = (
+        ('denied', 'denied'),
+        ('checking', 'checking'),
+        ('accepted', 'accepted'),
+    )
+    approve = models.CharField(max_length=30, choices=appr, default=appr[1][0])
 
 
-class Credit(Deposit):
-    pass
+class Credit(FinancialEntity):
+    months = models.ForeignKey('Month', on_delete=models.PROTECT)
+    interest_rate = models.ForeignKey('InterestRate', on_delete=models.PROTECT)
+    appr = (
+        ('denied', 'denied'),
+        ('checking', 'checking'),
+        ('accepted', 'accepted'),
+    )
+    approve = models.CharField(max_length=30, choices=appr, default=appr[1][0])
+
+
+class Installment(FinancialEntity):
+    months = models.ForeignKey('Month', on_delete=models.PROTECT)
+    company = models.ForeignKey('Company', on_delete=models.CASCADE)
+    states = (
+        ('denied', 'denied'),
+        ('checking', 'checking'),
+        ('accepted', 'accepted')
+    )
+    installment_status = models.CharField(max_length=200, choices=states, default=states[1][0])
+
+    def __str__(self):
+        return f"Installment of {self.user.username} - {self.sum} BYN"
 
 
 class Enterprise(models.Model):

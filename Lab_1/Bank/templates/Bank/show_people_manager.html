@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <p><a href="/main_manager">To main page</a></p>
+    {% for p in pers %}
+    <p><strong>Bank account id: {{ p.id }}</strong></p>
+    <p>Username: {{ p }}</p>
+    <p>Email: {{ p.email }}</p>
+    <p>Passport number: {{ p.passport_number }}</p>
+    <p>Phone number: {{ p.phone }}</p>
+    <p>Date joined: {{ p.date_joined }}</p>
+    <button onclick="window.location.href = 'edit/{{p.id}}';">Change status</button>
+    {% endfor %}
+</body>
+</html>

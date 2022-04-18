@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+    <title>{{ title }}</title>
 </head>
 {% block content %}
     <form action="." method="post">
@@ -7,5 +8,5 @@
       {% csrf_token %}
       <button>Open</button>
     </form>
-    <p><a href="/">To main page</a></p>
+    <p><a href="/main">To main page</a></p>
 {% endblock %}

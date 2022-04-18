@@ -5,14 +5,16 @@
     <title>{{ title }}</title>
 </head>
 <body>
-    <p><a href="/main">To main page</a></p>
+    <p><a href="/main_manager">To main page</a></p>
     {% for dep in deposits %}
         <p><strong>Deposit id: {{ dep.id }}</strong></p>
-        <p>Bank: {{ dep.bank }}</p>
+        <p>Owner: {{ dep.bank }}</p>
+        <p>Bank: {{ dep.user }}</p>
         <p>Sum: {{ dep.sum }} BYN</p>
         <p>Months: {{ dep.months }}</p>
         <p>Interest rate: {{ dep.interest_rate }}%</p>
         <p>Opening date: {{ dep.opening_date }}</p>
+        <button onclick="window.location.href = 'approve_deposit/{{dep.id}}';">Approve</button>
     {% endfor %}
 </body>
 </html>
