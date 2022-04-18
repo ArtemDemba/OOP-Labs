@@ -11,6 +11,7 @@
     <p>Bank: {{ acc.bank }}</p>
     <p>Sum: {{ acc.sum }} BYN</p>
     <p>Opening date: {{ acc.opening_date }}</p>
+    <button onclick="window.location.href = 'edit/{{acc.id}}';">Cancel</button>
     {% endfor %}
 </body>
 </html>
